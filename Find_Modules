@@ -1,0 +1,73 @@
+Find_Modules:=function(Root_System, Dimension, Roots)
+RootSystem:=CoxeterGroup(Root_System);
+I:=[i: i in [1 .. Dimension] | i notin Roots];
+
+output_shapes := function(x)
+    for i in Roots do
+        if x[i] ne 0 then
+            return true;
+        end if;
+    end for;
+    return false;
+end function;
+
+check_shape := function(x, shape)
+    for i in [1 .. #Roots] do
+        if x[Roots[i]] ne shape[i] then
+            return false;
+        end if;    
+    end for;
+    return true;
+end function;
+
+check_dominant := function(w)
+    for i in [1 .. #w] do
+        if w[i] lt 0 then
+            return false;
+        end if;
+    end for;
+    return true;
+end function;
+
+sum:= function(list)
+total:=0;
+for i in list do
+    total:=total+i;
+end for;
+return total;
+end function;
+
+order_shapes := function(set)
+m:=Max(set);
+highest_level:=sum(m);
+Ordered:=[];
+for i in [1..highest_level] do
+    for j in set do 
+        if sum(j) eq i then
+            Ordered:=Append(Ordered,j);
+        end if;
+    end for;
+end for;
+return Ordered;
+end function;
+
+M:=CartanMatrix(RootSystem);
+Shapes:={x: x in PositiveRoots(RootSystem) | output_shapes(x) eq true};
+Shapes:=order_shapes({[x[i]: i in Roots]: x in Shapes});
+
+for shape in Shapes do
+    print "--------------------------------------------------------";
+    Root_List:=[y: y in PositiveRoots(RootSystem) | check_shape(y, shape) eq true];
+    Mod_List:=[v * M : v in Root_List];
+    Weight_List:=[[w[i]: i in I] : w in Mod_List];
+    Dom_List:=[v: v in Weight_List | check_dominant(v) eq true];
+    print "Shape:", shape, 
+    "Highest Weight:", Weight_List[#Root_List],
+    "Dimension:", #Root_List, 
+    "Dominant Weights:", Dom_List, 
+    "G-Weights:", Root_List, 
+    "L-Weights:", Weight_List;
+    end for;
+
+return "FINISHED!";
+end function;
