@@ -1,0 +1,56 @@
+K<x>:=GF(16);
+GP:=GroupOfLieType("F4",K);
+rho:=AdjointRepresentation(GP);
+//Constructing B2 Levi
+x1p:= func < t | elt<GP| <2,t>> >;  
+x1n:= func < t | elt<GP| <2+24,t>> >;
+x2p:= func < t | elt<GP| <3,t>> >;
+x2n:= func < t | elt<GP| <3+24,t>> >;
+
+rts:=[x1p(1), x1n(1), x2p(1), x2n(1), x1p(x), x1n(x), x2p(x), x2n(x)];
+X0:=sub<Codomain(rho)|rho(rts)>;
+GroupName(X0);
+DirectSumDecomposition(GModule(X0));
+
+//Constructing the group 0001
+x1p:= func < t | elt<GP| <2,t>>>;
+x1n:= func < t | elt<GP| <2+24,t>>>;
+x2p:= func < t | elt<GP| <3,t>,<22,t>>>;
+x2n:= func < t | elt<GP| <3+24,t>,<20,t>>>;
+
+rts:=[x1p(1), x1n(1), x2p(1), x2n(1), x1p(x), x1n(x), x2p(x), x2n(x)];
+Y1:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y1);
+DirectSumDecomposition(GModule(Y1));
+
+//Constructing the group 0010
+x1p:= func < t | elt<GP| <2,t^2>,<17,t>>>;
+x1n:= func < t | elt<GP| <2+24,t^2>,<15,t>>>;
+x2p:= func < t | elt<GP| <3,t^2>>>;
+x2n:= func < t | elt<GP| <3+24,t^2>>>;
+
+rts:=[x1p(1), x1n(1), x2p(1), x2n(1), x1p(x), x1n(x), x2p(x), x2n(x)];
+Y2:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y2);
+DirectSumDecomposition(GModule(Y2));
+
+//Constructing the group 1100
+x1p:= func < t | elt<GP| <2,t^2>,<10,t>>>;
+x1n:= func < t | elt<GP| <2+24,t^2>,<7,t>>>;
+x2p:= func < t | elt<GP| <3,t^2>,<11,t^2>>>;
+x2n:= func < t | elt<GP| <3+24,t^2>,<5,t^2>>>;
+
+rts:=[x1p(1), x1n(1), x2p(1), x2n(1), x1p(x), x1n(x), x2p(x), x2n(x)];
+Y3:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y3);
+DirectSumDecomposition(GModule(Y3));
+
+//Constructing the group 0011
+x1p:= func < t | elt<GP| <2,t^2>,<17,t>>>;
+x1n:= func < t | elt<GP| <2+24,t^2>,<15,t>>>;
+x2p:= func < t | elt<GP| <3,t^2>,<22,t^2>>>;
+x2n:= func < t | elt<GP| <3+24,t^2>,<20,t^2>>>;
+rts:=[x1p(1), x1n(1), x2p(1), x2n(1), x1p(x), x1n(x), x2p(x), x2n(x)];
+Y4:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y4);
+DirectSumDecomposition(GModule(Y4));
