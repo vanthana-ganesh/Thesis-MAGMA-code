@@ -1,0 +1,44 @@
+//Constructing A1 subgroups in A1A1 parabolic subgroups
+//P_13 parabolic
+k<x>:=GF(16);
+K<[F]>:= RationalFunctionField( k, 102);
+GP:=GroupOfLieType("F4",K);
+cycle:=[F[1],F[2],F[3],F[4],F[5],F[6]];
+//F[100] is the variable t^(2^(r-1))
+//F[101] is the variable t^(2^(s-1))
+x1p:= func < t | elt<GP| <1,F[100]^2>,<3,F[101]^2>,<8,F[100]*cycle[1]>,<7,F[101]*cycle[2]>,<18,F[100]*cycle[3]>,<19,F[101]*cycle[4]>,<22,F[101]^2*cycle[5]>,<24,F[100]*(cycle[6]+cycle[1]^2*cycle[3])>>>;
+x1n:= func < t | elt<GP| <1+24,F[100]^2>,<3+24,F[101]^2>,<6,F[100]*cycle[1]>,<4,F[101]*cycle[2]>,<16,F[100]*cycle[3]>,<17,F[101]*cycle[4]>,<20,F[101]^2*cycle[5]>,<23,F[100]*cycle[6]>>>;
+//P_13 parabolic r=s+1
+K<x>:=GF(16);
+GP:=GroupOfLieType("F4",K);
+rho:=AdjointRepresentation(GP);
+cycle:=[0,0,0,0,0,0];
+r:=2;
+s:=1;
+x1p:= func < t | elt<GP| <1,t^(2^(r))>,<3,t^(2^(s))>,<8,t^(2^(r-1))*cycle[1]>,<7,t^(2^(s-1))*cycle[2]>,<18,t^(2^(r-1))*cycle[3]>,<19,t^(2^(s-1))*cycle[4]>,<22,t^(2^(s))*cycle[5]>,<24,t^(2^(r-1))*(cycle[6]+cycle[1]^2*cycle[3])>>>;
+x1n:= func < t | elt<GP| <1+24,t^(2^(r))>,<3+24,t^(2^(s))>,<6,t^(2^(r-1))*cycle[1]>,<4,t^(2^(s-1))*cycle[2]>,<16,t^(2^(r-1))*cycle[3]>,<17,t^(2^(s-1))*cycle[4]>,<20,t^(2^(s))*cycle[5]>,<23,t^(2^(r-1))*cycle[6]>>>;
+rts:=[x1p(1), x1n(1), x1p(x), x1n(x)];
+Y:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y);
+
+//P_24 parabolic
+k<x>:=GF(16);
+K<[F]>:= RationalFunctionField( k, 102);
+GP:=GroupOfLieType("F4",K);
+cycle:=[F[1],F[2],F[3],F[4],F[5],F[6]];
+//F[100] is the variable t^(2^(r-1))
+//F[101] is the variable t^(2^(s-1))
+x1p:= func < t | elt<GP| <2,F[100]^2>,<4,F[101]^2>,<16,F[101]^2*cycle[1]>,<5,F[100]*cycle[2]>,<12,F[101]*cycle[3]>,<23,F[100]*cycle[4]>,<17,F[100]*cycle[5]>,<21,F[101]*(cycle[6]+cycle[1]^2*cycle[3])>>>;
+x1n:= func < t | elt<GP| <2+24,F[100]^2>,<4+24,F[101]^2>,<9,F[101]^2*cycle[1]>,<1,F[100]*cycle[2]>,<8,F[101]*cycle[3]>,<22,F[100]*cycle[4]>,<15,F[100]*cycle[5]>,<19,F[101]*cycle[6]>>>;
+//P_24 parabolic r=s
+K<x>:=GF(16);
+GP:=GroupOfLieType("F4",K);
+rho:=AdjointRepresentation(GP);
+cycle:=[0,1,0,0,0,1];
+r:=1;
+s:=1;
+x1p:= func < t | elt<GP| <2,t^(2^(r))>,<4,t^(2^(s))>,<16,t^(2^(s))*cycle[1]>,<5,t^(2^(r-1))*cycle[2]>,<12,t^(2^(s-1))*cycle[3]>,<23,t^(2^(r-1))*cycle[4]>,<17,t^(2^(r-1))*cycle[5]>,<21,t^(2^(s-1))*cycle[6]>>>;
+x1n:= func < t | elt<GP| <2+24,t^(2^(r))>,<4+24,t^(2^(s))>,<9,t^(2^(s))*cycle[1]>,<1,t^(2^(r-1))*cycle[2]>,<8,t^(2^(s-1))*cycle[3]>,<22,t^(2^(r-1))*cycle[4]>,<15,t^(2^(r-1))*cycle[5]>,<19,t^(2^(s-1))*cycle[6]>>>;
+rts:=[x1p(1), x1n(1), x1p(x), x1n(x)];
+Y:=sub<Codomain(rho)|rho(rts)>;
+GroupName(Y);
